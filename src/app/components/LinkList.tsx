@@ -136,6 +136,7 @@ export default function LinkList({ initialLinks }: LinkListProps) {
               onEdit={() => handleEdit(link)}
               onDelete={() => handleDelete(link.id)}
               index={index}
+              isPendingDelete={deleteConfirm === link.id}
             />
           ))
         )}

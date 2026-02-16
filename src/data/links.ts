@@ -8,18 +8,19 @@ export type AppLink = {
 export const appLinks: AppLink[] = [
   {
     name: "Portfolio",
-    url: "https://example.com",
-    description: "My personal site and writing.",
+    url: "https://yourportfolio.com",
+    description: "My personal portfolio and projects.",
     tag: "featured"
   },
   {
-    name: "TaskFlow",
-    url: "https://example.com",
-    description: "A minimal project tracker for teams."
+    name: "GitHub",
+    url: "https://github.com/opyjo",
+    description: "Check out my open source projects."
   },
   {
-    name: "AudioLab",
-    url: "https://example.com",
-    description: "Generate custom playlists with AI."
+    name: "Linktree App",
+    url: "https://opyjolinktree.vercel.app",
+    description: "This modern link-in-bio app built with Next.js.",
+    tag: "new"
   }
 ];
