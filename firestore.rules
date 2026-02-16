@@ -1,0 +1,14 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Links collection rules
+    match /links/{linkId} {
+      // Allow public read access for all links
+      allow read: if true;
+
+      // Only authenticated admin can write (create, update, delete)
+      allow create, update, delete: if request.auth != null
+        && request.auth.token.email == 'opyjocodes@gmail.com';
+    }
+  }
+}
