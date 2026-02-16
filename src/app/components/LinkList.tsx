@@ -52,18 +52,25 @@ export default function LinkList({ initialLinks }: LinkListProps) {
       const token = await getAuthToken();
       if (!token) throw new Error("Not authenticated");
 
+      // Optimistically remove from UI immediately
+      setLinks((prevLinks) => prevLinks.filter((link) => link.id !== linkId));
+      setDeleteConfirm(null);
+
       const response = await fetch(`/api/links?id=${linkId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (!response.ok) throw new Error("Failed to delete link");
-
-      await fetchLinks();
-      setDeleteConfirm(null);
+      if (!response.ok) {
+        // If delete failed, restore the link by refetching
+        await fetchLinks();
+        throw new Error("Failed to delete link");
+      }
     } catch (error) {
       console.error("Error deleting link:", error);
       alert("Failed to delete link");
+      // Refetch to restore the correct state
+      await fetchLinks();
     }
   };
 
